@@ -4,7 +4,7 @@ const http = require('http');
 
 const config = require('./config');
 
-mongoose.connect(config.mongoUrl);
+mongoose.connect(config.mongoUrl, { useNewUrlParser: true });
 
 const server = express();
 

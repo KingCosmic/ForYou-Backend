@@ -1,5 +1,5 @@
 
 module.exports = {
-  mongoUrl: '',
-  port: 8000
+  mongoUrl: process.env.mongoUrl,
+  port: process.env.PORT
 }

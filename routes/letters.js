@@ -6,8 +6,14 @@ const router = express.Router();
 const Letter = require('../models/letter');
 
 router.get('/', (req, res) => {
-  console.log(Date.now() + " Ping Received");
+  console.log(Date.now() + ' Ping Received');
   res.sendStatus(200);
+});
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
 });
 
 router.get('/:letterId', (req, res) => {
