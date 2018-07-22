@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-router.use('/letters', require('./letters'));
+router.use('/', require('./letters'));
 
 module.exports = router;

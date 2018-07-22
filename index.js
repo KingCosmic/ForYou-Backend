@@ -1,12 +1,19 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const http = require('http');
 
-mongoose.connect('');
+const config = require('./config');
+
+mongoose.connect(config.mongoUrl);
 
 const server = express();
 
 server.use('/', require('./routes'));
 
-server.listen(4000, () => {
-  console.log('Listening on port: 4000');
+server.listen(config.port, () => {
+  console.log(`Listening on port: ${config.port}`);
 })
+
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);

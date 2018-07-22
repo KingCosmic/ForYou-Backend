@@ -1,7 +1,14 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
 const router = express.Router();
 
 const Letter = require('../models/letter');
+
+router.get('/', (req, res) => {
+  console.log(Date.now() + " Ping Received");
+  res.sendStatus(200);
+});
 
 router.get('/:letterId', (req, res) => {
   const letterId = req.params.letterId;
@@ -20,7 +27,7 @@ router.get('/:letterId', (req, res) => {
   })
 });
 
-router.post('/write', (req, res) => {
+router.post('/write', bodyParser.json(), (req, res) => {
   let content = req.body.content;
 
   let letter = new Letter({
@@ -31,7 +38,7 @@ router.post('/write', (req, res) => {
     if (err) return res.status(500).send({ err, message: 'Error accured trying to save letter' });
 
     res.status(200).send({
-      data: newLetter
+      data: newLetter.letterId
     })
   })
 });
